@@ -95,7 +95,7 @@ class FileExplorer(object):
 
         # Context menu on right click
         # Check out drag and drop: https://stackoverflow.com/questions/44887576/how-can-i-create-a-drag-and-drop-interface
-        self.tree.bind("<Button-3>", self.tree_right_click)
+        self.tree.bind("<Button-2>", self.tree_right_click)
         self.context_menu =tk.Menu(root, tearoff=0, font=font_size)
         self.context_menu.add_command(label='Open', accelerator="Return", command=self.btn_open_item_click)
         self.context_menu.add_command(label='Open annotated pages    ', command=self.btn_open_oap_item_click)
@@ -589,9 +589,9 @@ class FileExplorer(object):
                         current_page = 0 if open_oap else item.current_page()
                         subprocess.call(["evince", "-i", str(current_page), file_to_open])
                     except:
-                        subprocess.call(["xdg-open", file_to_open])
+                        subprocess.call(["open", file_to_open])
                 else:
-                    subprocess.call(["xdg-open", file_to_open])
+                    subprocess.call(["open", file_to_open])
 
 
     #
@@ -792,7 +792,7 @@ class FileExplorer(object):
             if sys.platform == "win32":
                 os.startfile(os.path.normpath(item.path_remapy))
             else:
-                subprocess.call(('xdg-open', item.path_remapy))
+                subprocess.call(("open", item.path_remapy))
 
     def key_binding_toggle_bookmark(self, event):
         self.btn_toggle_bookmark()
